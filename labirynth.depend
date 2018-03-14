@@ -1,0 +1,76 @@
+# depslib dependency file v1.0
+1521062159 source:c:\users\apiec\documents\c\labirynth\main.cpp
+	"MazeSolver.h"
+	"Maze.h"
+	<cstdlib>
+	<ctime>
+	"MyList.h"
+	"OrderedList.h"
+
+1519678290 source:c:\users\apiec\documents\c\labirynth\src\maze.cpp
+	"Maze.h"
+
+1519678281 c:\users\apiec\documents\c\labirynth\include\maze.h
+
+1519679649 source:c:\users\apiec\documents\c\labirynth\src\adsasd.cpp
+	"adsasd.h"
+
+1519679649 c:\users\apiec\documents\c\labirynth\include\adsasd.h
+
+1520531934 c:\users\apiec\documents\c\labirynth\maze.h
+	<iostream>
+	<vector>
+	"xy.h"
+
+1521062949 source:c:\users\apiec\documents\c\labirynth\maze.cpp
+	"Maze.h"
+	<cstdlib>
+	<vector>
+	<cstring>
+	<fstream>
+	"MyList.h"
+
+1521061874 source:c:\users\apiec\documents\c\labirynth\mazesolver.cpp
+	"MazeSolver.h"
+	"Maze.h"
+	"Cell.h"
+	"OrderedList.h"
+	<cstdlib>
+	<cstring>
+
+1521063317 c:\users\apiec\documents\c\labirynth\mazesolver.h
+	"xy.h"
+	"Maze.h"
+	"Cell.h"
+	<vector>
+
+1519990747 source:c:\users\apiec\documents\c\labirynth\xy.cpp
+	"xy.h"
+
+1521063044 c:\users\apiec\documents\c\labirynth\xy.h
+
+1520014013 source:c:\users\apiec\documents\c\labirynth\mylist.cpp
+	"MyList.h"
+
+1521063094 c:\users\apiec\documents\c\labirynth\mylist.h
+	<cstdlib>
+
+1520886750 source:c:\users\apiec\documents\c\labirynth\orderedlist.cpp
+
+1521062133 c:\users\apiec\documents\c\labirynth\orderedlist.h
+	"Cell.h"
+	<cstdlib>
+
+1521062133 c:\users\apiec\documents\c\labirynth\cell.h
+	"xy.h"
+	"MyList.h"
+
+1520888434 source:c:\users\apiec\documents\c\labirynth\cell.cpp
+	"Cell.h"
+	<climits>
+
+1520784539 source:c:\users\apiec\documents\c\labirynth\src\mazemenu.cpp
+	"MazeMenu.h"
+
+1520784539 c:\users\apiec\documents\c\labirynth\include\mazemenu.h
+
