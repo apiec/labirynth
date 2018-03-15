@@ -1,3 +1,4 @@
+#include "MazeMenu.h";
 #include "MazeSolver.h"
 #include "Maze.h"
 #include "MyList.h"
@@ -22,12 +23,15 @@ int main(){
     std::cout << sizeof(xy) << "\n";
     */
    // MazeSolver* test = new MazeSolver(10, 20, false);
-    MazeSolver* test = new MazeSolver(fn);
+//    MazeSolver* test = new MazeSolver(fn);
+//
+//
+//
+//    //test->print_maze_grid();
+//    test->print_maze();
+//    test->print_maze_solution();
+    MazeMenu test_menu;
+    test_menu.main_menu();
 
-
-
-    //test->print_maze_grid();
-    test->print_maze();
-    test->print_maze_solution();
     return 0;
 }

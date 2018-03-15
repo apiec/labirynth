@@ -23,7 +23,7 @@ class MazeSolver {
         void print_maze_grid();
         void print_maze();
         void print_maze_solution();
-
+        void print_maze_totxt(std::string filename);
 
         //constructors
         MazeSolver();

@@ -310,6 +310,7 @@ int Maze::print_maze(){
     for(int i = -1; i < width + 1; i++){
         std::cout << frame;
     }
+    std::cout << std::endl;
     return 0;
 }
 

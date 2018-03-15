@@ -161,12 +161,11 @@ void MazeSolver::print_maze_solution(){
     for(int i = 0; i < width * height; i++){
             std::cout << maze_print[i];
             if( (i + 1) % width == 0 ){
-                std::cout << '*';
-                std::cout << "\n";
-                std::cout << '*';
+                std::cout << "*\n*";
             }
     }
     for(int i = 0; i < width + 1; i++) std::cout << '*';
+    std::cout << std::endl;
 }
 
 void MazeSolver::print_maze_grid(){
@@ -174,5 +173,8 @@ void MazeSolver::print_maze_grid(){
 }
 void MazeSolver::print_maze(){
     maze->print_maze();
+}
+void MazeSolver::print_maze_totxt(std::string filename){
+    maze->print_maze_totxt(filename);
 }
 
