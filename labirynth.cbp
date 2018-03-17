@@ -39,15 +39,15 @@
 		<Unit filename="Cell.h" />
 		<Unit filename="Maze.cpp" />
 		<Unit filename="Maze.h" />
+		<Unit filename="MazeMenu.cpp" />
+		<Unit filename="MazeMenu.h" />
 		<Unit filename="MazeSolver.cpp" />
 		<Unit filename="MazeSolver.h" />
 		<Unit filename="MyList.cpp" />
 		<Unit filename="MyList.h" />
 		<Unit filename="OrderedList.cpp" />
 		<Unit filename="OrderedList.h" />
-		<Unit filename="include/MazeMenu.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/MazeMenu.cpp" />
 		<Unit filename="xy.cpp" />
 		<Unit filename="xy.h" />
 		<Extensions>

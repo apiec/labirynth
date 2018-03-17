@@ -31,7 +31,7 @@
 	<fstream>
 	"MyList.h"
 
-1521151989 source:c:\users\apiec\documents\c\labirynth\mazesolver.cpp
+1521153689 source:c:\users\apiec\documents\c\labirynth\mazesolver.cpp
 	"MazeSolver.h"
 	"Maze.h"
 	"Cell.h"
@@ -39,7 +39,7 @@
 	<cstdlib>
 	<cstring>
 
-1521153711 c:\users\apiec\documents\c\labirynth\mazesolver.h
+1521310424 c:\users\apiec\documents\c\labirynth\mazesolver.h
 	"xy.h"
 	"Maze.h"
 	"Cell.h"
@@ -75,10 +75,10 @@
 
 1520784539 c:\users\apiec\documents\c\labirynth\include\mazemenu.h
 
-1521153887 c:\users\apiec\documents\c\labirynth\mazemenu.h
+1521310242 c:\users\apiec\documents\c\labirynth\mazemenu.h
 	"MazeSolver.h"
 
-1521151816 source:c:\users\apiec\documents\c\labirynth\mazemenu.cpp
+1521310412 source:c:\users\apiec\documents\c\labirynth\mazemenu.cpp
 	"MazeMenu.h"
 	"MazeSolver.h"
 	<iostream>

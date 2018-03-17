@@ -13,9 +13,10 @@ class MazeSolver {
         Maze* maze;
         std::vector<xy> path;
         char* maze_print;
+        bool solution_found;
 
         void reconstruct_path(Cell current, Cell** cell_grid);
-        int a_star();
+        bool a_star();
 
         void create_maze_print();
 
@@ -24,12 +25,12 @@ class MazeSolver {
         void print_maze();
         void print_maze_solution();
         void print_maze_totxt(std::string filename);
+        bool get_solution_found();
 
         //constructors
         MazeSolver();
         MazeSolver(int h, int w, bool treelike = true);
         MazeSolver(std::string filename);
-
 
         //deconstructor
         ~MazeSolver();

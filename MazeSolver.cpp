@@ -8,27 +8,28 @@
 
 MazeSolver::MazeSolver(){
     this->maze = new Maze(30, 30, true);
-    this->a_star();
+    this->solution_found = this->a_star();
 }
 
 MazeSolver::MazeSolver(int h, int w, bool treelike){
     this->maze = new Maze(h, w, treelike);
-    this->a_star();
+    this->solution_found = this->a_star();
 }
 MazeSolver::MazeSolver(std::string filename){
     this->maze = new Maze(filename);
-    std::cout << this->a_star() << "\n";
+    this->solution_found = this->a_star();
 }
 
 MazeSolver::~MazeSolver(){
     delete maze;
+    delete maze_print;
 }
 
-int MazeSolver::a_star(){
+bool MazeSolver::a_star(){
     /**
     *   implementation of the A* algorithm
-    *   return 0 if it finds the way
-    *   return 1 if it does not
+    *   return true if it finds the way
+    *   return false if it does not
     *   https://en.wikipedia.org/wiki/A*_search_algorithm
     **/
     int height       = this->maze->get_height();
@@ -79,7 +80,7 @@ int MazeSolver::a_star(){
         if(best.location == finish){
             //reconstructing the path and finishing
             reconstruct_path(best, cell_grid);
-            return 0;
+            return true;
         }
         closed_set[best.location.x][best.location.y] = true; //adding the cell to the closed set
         while(!best.neighbors.empty()){
@@ -106,7 +107,7 @@ int MazeSolver::a_star(){
     }
     delete[] cell_grid;
 
-    return 1; //it only gets here if it doesn't find the end
+    return false; //it only gets here if it doesn't find the end
 }
 
 void MazeSolver::reconstruct_path(Cell current, Cell** cell_grid){
@@ -176,5 +177,9 @@ void MazeSolver::print_maze(){
 }
 void MazeSolver::print_maze_totxt(std::string filename){
     maze->print_maze_totxt(filename);
+}
+
+bool MazeSolver::get_solution_found(){
+    return this->solution_found;
 }
 

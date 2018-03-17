@@ -24,9 +24,9 @@ void MazeMenu::main_menu(){
     std::string input = "";
     bool stop = false;
 
+    std::cout << "LABIRYNTH\n";
     while(!stop){
         std::cout
-        << "LABIRYNTH\n"
         << "Main Menu:\n"
         << "1. Generate the maze\n"
         << "2. Read the maze from a txt file\n"
@@ -77,7 +77,11 @@ void MazeMenu::generation_menu(){
 }
 
 void MazeMenu::txt_menu(){
-
+    std::string filename = read_filename();
+    this->maze_instance = new MazeSolver(filename);
+    maze_loaded_menu();
+    delete maze_instance;
+    maze_instance = NULL;
 }
 
 void MazeMenu::maze_loaded_menu(){
@@ -97,17 +101,21 @@ void MazeMenu::maze_loaded_menu(){
         }
         switch(atoi(input.c_str())){
             case 1 :
-                maze_instance->print_maze();
+                this->maze_instance->print_maze();
                 break;
             case 2 :
-                maze_instance->print_maze_solution();
+                this->maze_instance->print_maze_solution();
+                if(!this->maze_instance->get_solution_found()){
+                    std::cout << "No path found.\n";
+                }
                 break;
             case 3 :
-                maze_instance->print_maze_grid();
+                this->maze_instance->print_maze_grid();
                 break;
             case 4 :
-                maze_instance->print_maze_totxt(read_filename());
+                this->maze_instance->print_maze_totxt(read_filename());
                 break;
+
             case 9 :
                 stop = true;
                 break;
