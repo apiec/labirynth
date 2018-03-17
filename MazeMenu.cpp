@@ -14,13 +14,6 @@ MazeMenu::~MazeMenu(){
 
 void MazeMenu::main_menu(){
 
-    /*
-    const int possible_inputs = 10;
-    char* inputs = new char[possible_inputs];
-    for(int i = 0; i < possible_inputs; i++){
-        inputs[i] = '0' + i;
-    }
-    */
     std::string input = "";
     bool stop = false;
 
@@ -44,7 +37,6 @@ void MazeMenu::main_menu(){
             case 9 :
                 stop = true;
                 break;
-
 
             default :
                 std::cout << "PLEASE CHOOSE A VALID OPTION\n";
@@ -151,7 +143,7 @@ std::string MazeMenu::read_filename(){
     }
     size_t fn_sz = filename.size();
     std::string suffix = ".txt";
-    if(filename.substr(fn_sz - suffix.size(), fn_sz) != suffix){
+    if(filename.size() > suffix.size() && filename.substr(fn_sz - suffix.size(), fn_sz) != suffix){
         filename += suffix;
     }
     return filename;

@@ -7,6 +7,46 @@
 
 #include "MyList.h"
 
+//default constructor
+Maze::Maze(bool is_treelike){
+    width = 100;
+    height = 40;
+    initiate_startfinish();
+    treelike = is_treelike;
+    initiate_maze_grid();
+    generate_maze();
+}
+
+//constructor with width and height as parameters
+Maze::Maze(int h, int w, bool is_treelike): width(w), height(h) {
+    initiate_startfinish();
+    treelike = is_treelike;
+    initiate_maze_grid();
+    generate_maze();
+}
+
+Maze::Maze(std::string mazetxt){
+    initiate_startfinish();
+    generate_maze(mazetxt);
+}
+
+//deconstructor
+Maze::~Maze(){
+    //deleting maze_grid
+    for(int i = 0; i < height; i++){
+        delete[] maze_grid[i];
+    }
+    delete[] maze_grid;
+}
+
+void Maze::initiate_startfinish(){
+    start.x = -1;
+    start.y = -1;
+    finish.x = -1;
+    finish.y = -1;
+}
+
+
 int Maze::initiate_maze_grid(){
     //initiating maze_grid with 0s
     maze_grid = new bool*[height];
@@ -362,41 +402,4 @@ xy Maze::get_finish(){
     return finish;
 }
 
-void Maze::initiate_startfinish(){
-    start.x = -1;
-    start.y = -1;
-    finish.x = -1;
-    finish.y = -1;
-}
 
-//default constructor
-Maze::Maze(bool is_treelike){
-        width = 100;
-        height = 40;
-        initiate_startfinish();
-        treelike = is_treelike;
-        initiate_maze_grid();
-        generate_maze();
-}
-
-//constructor with width and height as parameters
-Maze::Maze(int h, int w, bool is_treelike): width(w), height(h) {
-        initiate_startfinish();
-        treelike = is_treelike;
-        initiate_maze_grid();
-        generate_maze();
-}
-
-Maze::Maze(std::string mazetxt){
-    initiate_startfinish();
-    generate_maze(mazetxt);
-}
-
-//deconstructor
-Maze::~Maze(){
-        //deleting maze_grid
-        for(int i = 0; i < height; i++){
-            delete[] maze_grid[i];
-        }
-        delete[] maze_grid;
-}

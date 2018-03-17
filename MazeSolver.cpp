@@ -17,6 +17,8 @@ MazeSolver::MazeSolver(int h, int w, bool treelike){
 }
 MazeSolver::MazeSolver(std::string filename){
     this->maze = new Maze(filename);
+    std::cout << this->maze->get_height() << std::endl;
+    std::cout << this->maze->get_width() << std::endl;
     this->solution_found = this->a_star();
 }
 

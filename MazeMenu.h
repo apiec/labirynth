@@ -9,6 +9,7 @@ class MazeMenu
         MazeSolver* maze_instance;
         int read_int(int low_bound, int high_bound, std::string val_name);
         std::string read_filename();
+
     public:
 
         void main_menu();
