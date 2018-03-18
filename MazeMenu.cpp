@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <algorithm>
+#include <fstream>
 
 MazeMenu::MazeMenu(){
     maze_instance = NULL;
@@ -14,7 +15,6 @@ MazeMenu::~MazeMenu(){
 
 void MazeMenu::main_menu(){
 
-    std::string input = "";
     bool stop = false;
 
     std::cout << "LABIRYNTH\n";
@@ -25,8 +25,10 @@ void MazeMenu::main_menu(){
         << "2. Read the maze from a txt file\n"
         << "9. EXIT\n";
 
-        input = "";
-        getline(std::cin, input);
+        std::string input = "";
+        while(input.empty()){
+            getline(std::cin, input);
+        }
         switch(atoi(input.c_str())){
             case 1 :
                 generation_menu();
@@ -70,6 +72,12 @@ void MazeMenu::generation_menu(){
 
 void MazeMenu::txt_menu(){
     std::string filename = read_filename();
+    std::ifstream f(filename.c_str());
+    if(!f.is_open()){
+        std::cout << "No such file in the directory!\n";
+        return;
+    }
+    f.close();
     this->maze_instance = new MazeSolver(filename);
     maze_loaded_menu();
     delete maze_instance;
@@ -128,7 +136,9 @@ int MazeMenu::read_int(int low_bound, int high_bound, std::string val_name){
             std::cout << "Please choose a valid number (" << low_bound << "-" << high_bound << ")\n";
         }
         std::cout << val_name << ": ";
-        getline(std::cin, input);
+        while(input.empty()){
+            getline(std::cin, input);
+        }
         to_return = atoi(input.c_str());
         incorrect_input = true;
     }
@@ -139,11 +149,11 @@ std::string MazeMenu::read_filename(){
     std::string filename = "";
     std::cout << "Give a file name:\n";
     while(filename.empty()){
-        std::cin >> filename;
+        getline(std::cin, filename);
     }
     size_t fn_sz = filename.size();
     std::string suffix = ".txt";
-    if(filename.size() > suffix.size() && filename.substr(fn_sz - suffix.size(), fn_sz) != suffix){
+    if(fn_sz <= suffix.size() || filename.substr(fn_sz - suffix.size(), fn_sz) != suffix){
         filename += suffix;
     }
     return filename;
