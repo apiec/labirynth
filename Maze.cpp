@@ -9,51 +9,51 @@
 
 //default constructor
 Maze::Maze(bool is_treelike){
-    width = 100;
-    height = 40;
-    initiate_startfinish();
-    treelike = is_treelike;
-    initiate_maze_grid();
-    generate_maze();
+    this->width = 100;
+    this->height = 40;
+    this->initiate_startfinish();
+    this->treelike = is_treelike;
+    this->initiate_maze_grid();
+    this->generate_maze();
 }
 
 //constructor with width and height as parameters
 Maze::Maze(int h, int w, bool is_treelike): width(w), height(h) {
-    initiate_startfinish();
-    treelike = is_treelike;
-    initiate_maze_grid();
-    generate_maze();
+    this->initiate_startfinish();
+    this->treelike = is_treelike;
+    this->initiate_maze_grid();
+    this->generate_maze();
 }
 
 Maze::Maze(std::string mazetxt){
-    initiate_startfinish();
-    generate_maze(mazetxt);
+    this->initiate_startfinish();
+    this->generate_maze(mazetxt);
 }
 
 //deconstructor
 Maze::~Maze(){
     //deleting maze_grid
     for(int i = 0; i < height; i++){
-        delete[] maze_grid[i];
+        delete[] this->maze_grid[i];
     }
-    delete[] maze_grid;
+    delete[] this->maze_grid;
 }
 
 void Maze::initiate_startfinish(){
-    start.x = -1;
-    start.y = -1;
-    finish.x = -1;
-    finish.y = -1;
+    this->start.x = -1;
+    this->start.y = -1;
+    this->finish.x = -1;
+    this->finish.y = -1;
 }
 
 
 int Maze::initiate_maze_grid(){
     //initiating maze_grid with 0s
-    maze_grid = new bool*[height];
+    this->maze_grid = new bool*[height];
 
     for(int i = 0; i < height; i++){
-        maze_grid[i] = new bool[width];
-        std::memset(maze_grid[i], 0, width);
+        this->maze_grid[i] = new bool[width];
+        std::memset(this->maze_grid[i], 0, width);
     }
     return 0;
 }
@@ -65,28 +65,28 @@ int Maze::add_wallstolist(xy cell, std::vector<xy>& wall_list){
     if(cell.x + 1 < height - 1){
         xy tmp = cell;
         tmp.x++;
-        if(maze_grid[tmp.x][tmp.y] == 0){
+        if(this->maze_grid[tmp.x][tmp.y] == 0){
             wall_list.push_back(tmp);
         }
     }
     if(cell.x - 1 > 0){
         xy tmp = cell;
         tmp.x--;
-        if(maze_grid[tmp.x][tmp.y] == 0){
+        if(this->maze_grid[tmp.x][tmp.y] == 0){
             wall_list.push_back(tmp);
         }
     }
     if(cell.y + 1 < width - 1){
         xy tmp = cell;
         tmp.y++;
-        if(maze_grid[tmp.x][tmp.y] == 0){
+        if(this->maze_grid[tmp.x][tmp.y] == 0){
             wall_list.push_back(tmp);
         }
     }
     if(cell.y - 1 > 0){
         xy tmp = cell;
         tmp.y--;
-        if(maze_grid[tmp.x][tmp.y] == 0){
+        if(this->maze_grid[tmp.x][tmp.y] == 0){
             wall_list.push_back(tmp);
         }
     }
@@ -106,7 +106,7 @@ bool Maze::can_bepassage(xy tocheck){
     //checks the 3x3 grid around the point
     for(int i = -1; i < 2; i++){
         for(int j = -1; j < 2; j++){
-            if(maze_grid[x+i][y+j] == 1 && (i != 0 || j != 0 )){
+            if(this->maze_grid[x+i][y+j] == 1 && (i != 0 || j != 0 )){
                 if(abs(i) == 1 && abs(j) == 1){
                     corner_count++;
                 }else{
@@ -131,7 +131,7 @@ int Maze::generate_maze(){
     /**
     * generates the maze using randomized Prim's algorithm
     **/
-    initiate_maze_grid();
+    this->initiate_maze_grid();
     std::vector<xy> wall_vec;
 
     //pick a random point
@@ -140,7 +140,7 @@ int Maze::generate_maze(){
     pt.y = rand() % (width - 2) + 1;    //therefore the rand % (dim - 2) + 1
 
     //adding the random point to the maze;
-    maze_grid[pt.x][pt.y] = 1;
+    this->maze_grid[pt.x][pt.y] = 1;
     //adding the starting point walls to the wall_vec
     add_wallstolist(pt, wall_vec);
     //iterating until there are walls in the list
@@ -151,12 +151,12 @@ int Maze::generate_maze(){
         //checking if wall can be made into a passage
         if(can_bepassage(wall)){
             //making the wall into a passage
-            maze_grid[wall.x][wall.y] = 1;
-            add_wallstolist(wall, wall_vec);
+            this->maze_grid[wall.x][wall.y] = 1;
+            this->add_wallstolist(wall, wall_vec);
         }
         wall_vec.erase(wall_vec.begin() + position);
     }
-    random_startfinish();
+    this->random_startfinish();
     return 0;
 }
 
@@ -179,9 +179,9 @@ int Maze::generate_maze(std::string filename){
     }
     f.close();
     //setting width and height and creating maze_grid
-    width = max_line_size;
-    height = (int)lines.size();
-    initiate_maze_grid();
+    this->width = max_line_size;
+    this->height = (int)lines.size();
+    this->initiate_maze_grid();
 
     //setting some values
     const char wll = '#';
@@ -195,31 +195,31 @@ int Maze::generate_maze(std::string filename){
             if(j < (int)line.size()){
                 switch(line[j]){
                     case wll :
-                        maze_grid[i][j] = 0;
+                        this->maze_grid[i][j] = 0;
                         break;
 
                     case strt :
-                        start.x = i;
-                        start.y = j;
-                        maze_grid[i][j] = 1;
+                        this->start.x = i;
+                        this->start.y = j;
+                        this->maze_grid[i][j] = 1;
                         break;
 
                     case fnsh :
-                        finish.x = i;
-                        finish.y = j;
-                        maze_grid[i][j] = 1;
+                        this->finish.x = i;
+                        this->finish.y = j;
+                        this->maze_grid[i][j] = 1;
                         break;
 
                     default :
-                        maze_grid[i][j] = 1;
+                        this->maze_grid[i][j] = 1;
                 }
             }else{
-                maze_grid[i][j] = 1;
+                this->maze_grid[i][j] = 1;
             }
         }
     }
 
-    random_startfinish();
+    this->random_startfinish();
 
     return 0;
 }
@@ -240,21 +240,21 @@ int Maze::random_startfinish(){
     int y2 = width - 1;
 
     if(rand()%2){
-        if(start.x < 0) start.x = x1;
-        if(finish.x < 0) finish.x = x2;
+        if(this->start.x < 0) this->start.x = x1;
+        if(this->finish.x < 0) this->finish.x = x2;
     }else{
-        if(start.x < 0) start.x = x2;
-        if(finish.x < 0) finish.x = x1;
+        if(this->start.x < 0) this->start.x = x2;
+        if(this->finish.x < 0) this->finish.x = x1;
     }
     if(rand()%2){
-        if(start.y < 0) start.y = y1;
-        if(finish.y < 0) finish.y = y2;
+        if(this->start.y < 0) this->start.y = y1;
+        if(this->finish.y < 0) this->finish.y = y2;
     }else{
-        if(start.y < 0) start.y = y2;
-        if(finish.y < 0) finish.y = y1;
+        if(this->start.y < 0) this->start.y = y2;
+        if(this->finish.y < 0) this->finish.y = y1;
     }
-    find_nearest_passage(start);
-    find_nearest_passage(finish);
+    this->find_nearest_passage(this->start);
+    this->find_nearest_passage(this->finish);
     return 0;
 }
 
@@ -268,7 +268,7 @@ int Maze::find_nearest_passage(xy &point){
     int search_radius = 1;
     int x = point.x;
     int y = point.y;
-    while(maze_grid[x][y] == 0){
+    while(this->maze_grid[x][y] == 0){
         for(int i = -search_radius; i <= search_radius; i++){
             if(x + i < height && x + i > 0){
                 if(y - search_radius > 0 && maze_grid[x + i][y - search_radius] == 1){
@@ -308,7 +308,7 @@ int Maze::find_nearest_passage(xy &point){
 int Maze::print_maze_grid(){
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
-            std::cout << maze_grid[i][j];
+            std::cout << this->maze_grid[i][j];
         }
         std::cout << "\n";
     }
@@ -331,9 +331,9 @@ int Maze::print_maze(){
     for(int i = 0; i < height; i++){
         std::cout << frame;
         for(int j = 0; j < width; j++){
-            if(i == start.x && j == start.y){
+            if(i == this->start.x && j == this->start.y){
                 std::cout << 's';
-            }else if(i == finish.x && j == finish.y){
+            }else if(i == this->finish.x && j == this->finish.y){
                 std::cout << 'e';
             }else{
                 if(maze_grid[i][j] == 0){
@@ -358,20 +358,20 @@ int Maze::print_maze(){
 int Maze::print_maze_totxt(std::string filename){
 
     std::ofstream txt_write(filename.c_str());
-    if(!txt_write.is_open())
-        return -1;
+
+    if(!txt_write.is_open()) return -1;
 
     // 178
     char wall = '#';
     char passage = ' ';
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
-           if(i == start.x && j == start.y){
+           if(i == this->start.x && j == this->start.y){
                 txt_write << 's';
-            }else if(i == finish.x && j == finish.y){
+            }else if(i == this->finish.x && j == this->finish.y){
                 txt_write << 'e';
             }else{
-                if(maze_grid[i][j] == 0){
+                if(this->maze_grid[i][j] == 0){
                     txt_write << wall;
                 }else{
                     txt_write << passage;
@@ -387,19 +387,19 @@ int Maze::print_maze_totxt(std::string filename){
 
 
 bool** Maze::get_maze_grid(){
-    return maze_grid;
+    return this->maze_grid;
 }
 int Maze::get_height(){
-    return height;
+    return this->height;
 }
 int Maze::get_width(){
-    return width;
+    return this->width;
 }
 xy Maze::get_start(){
-    return start;
+    return this->start;
 }
 xy Maze::get_finish(){
-    return finish;
+    return this->finish;
 }
 
 

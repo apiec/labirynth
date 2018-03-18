@@ -128,7 +128,6 @@ void MazeMenu::maze_loaded_menu(){
 }
 
 int MazeMenu::read_int(int low_bound, int high_bound, std::string val_name){
-    std::string input = "";
     int to_return = low_bound - 1;
     bool incorrect_input = false;
     while(to_return < low_bound || to_return > high_bound){
@@ -136,6 +135,7 @@ int MazeMenu::read_int(int low_bound, int high_bound, std::string val_name){
             std::cout << "Please choose a valid number (" << low_bound << "-" << high_bound << ")\n";
         }
         std::cout << val_name << ": ";
+        std::string input = "";
         while(input.empty()){
             getline(std::cin, input);
         }

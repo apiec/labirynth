@@ -1,9 +1,5 @@
-#include "MazeMenu.h"
-#include "MazeSolver.h"
-#include "Maze.h"
-#include "MyList.h"
-#include "OrderedList.h"
 
+#include "MazeMenu.h"
 #include <cstdlib>
 #include <ctime>
 
