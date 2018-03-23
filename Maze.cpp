@@ -104,8 +104,8 @@ bool Maze::can_bepassage(xy tocheck){
     int y = tocheck.y;
 
     //checks the 3x3 grid around the point
-    for(int i = -1; i < 2; i++){
-        for(int j = -1; j < 2; j++){
+    for(int i = -1; i <= 1; i++){
+        for(int j = -1; j <= 1; j++){
             if(this->maze_grid[x+i][y+j] == 1 && (i != 0 || j != 0 )){
                 if(abs(i) == 1 && abs(j) == 1){
                     corner_count++;
@@ -116,14 +116,8 @@ bool Maze::can_bepassage(xy tocheck){
         }
     }
     int passage_threshold = treelike ? 1 : 2;
-    if(passage_count > passage_threshold || corner_count > 1)
-        return false;
-    /*
-    if(treelike && (passage_count > 1 || corner_count > 1))
-        return false;
-    else if(!treelike && (passage_count > 2 || corner_count > 1))
-        return false;
-    */
+    if(passage_count > passage_threshold || corner_count > 1) {return false;}
+
     return true;
 }
 
@@ -227,13 +221,6 @@ int Maze::generate_maze(std::string filename){
 
 int Maze::random_startfinish(){
     //picks a random point that is a passage from opposite corners of the maze
-/*
-    int par = std::min(height, width)/std::min(height, width) + 1; //a parameter
-    int x1 = rand() % (height / par) + 1;
-    int x2 = height - rand()%(height / par) - 1;
-    int y1 = rand() % (width / par) + 1;
-    int y2 = width - rand()%(width / par) - 1;
-  */
     int x1 = 0;
     int x2 = height - 1;
     int y1 = 0;
@@ -321,8 +308,9 @@ int Maze::print_maze_grid(){
 int Maze::print_maze(){
     char wall = 219;
     char passage = ' ';
-    char frame = '#';
+    char frame = '*';
     //print out the frame
+
     for(int i = -1; i < width + 1; i++){
         std::cout << frame;
     }

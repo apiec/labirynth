@@ -73,7 +73,7 @@ void MazeMenu::generation_menu(){
         inp = tolower(inp);
     }
     bool check = (inp == 'y');
-    this->maze_instance = new MazeSolver(h_inp, w_inp, check);
+    this->maze_instance = new MazeSolver(h_inp, w_inp, !check);
     maze_loaded_menu();
 
     delete maze_instance;

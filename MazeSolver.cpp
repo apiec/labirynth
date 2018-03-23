@@ -27,13 +27,14 @@ MazeSolver::~MazeSolver(){
     delete this->maze_print;
 }
 
+/**
+ * Implementation of the A* search algorithm.
+ * Return true if it finds the way.
+ * Return false if it does not.
+ * https://en.wikipedia.org/wiki/A*_search_algorithm
+**/
 bool MazeSolver::a_star(){
-    /**
-    *   implementation of the A* algorithm
-    *   return true if it finds the way
-    *   return false if it does not
-    *   https://en.wikipedia.org/wiki/A*_search_algorithm
-    **/
+
     int height       = this->maze->get_height();
     int width        = this->maze->get_width();
     bool** maze_grid = this->maze->get_maze_grid();
@@ -104,6 +105,7 @@ bool MazeSolver::a_star(){
             }
         }
     }
+    //delete the dynamic resources
     for(int i = 0; i < height; i++){
         delete [] cell_grid[i];
     }
@@ -113,10 +115,10 @@ bool MazeSolver::a_star(){
 }
 
 void MazeSolver::reconstruct_path(Cell current, Cell** cell_grid){
-    while(!path.empty()){
+    while( !path.empty() ){
         path.pop_back();
     }
-    while(current.parent.x > -1 && current.parent.y > -1){
+    while( current.parent.x > -1 && current.parent.y > -1 ){
         path.push_back(current.location);
         current = cell_grid[current.parent.x][current.parent.y];
     }
@@ -159,7 +161,7 @@ void MazeSolver::print_maze_solution(){
     std::cout << "\n";
     int width = maze->get_width();
     int height = maze->get_height();
-    for(int i = 0; i < width + 2; i++) std::cout << '*';
+    for(int i = 0; i < width + 2; i++){std::cout << '*';}
     std::cout << "\n*";
     for(int i = 0; i < width * height; i++){
             std::cout << maze_print[i];
@@ -180,7 +182,6 @@ void MazeSolver::print_maze(){
 void MazeSolver::print_maze_totxt(std::string filename){
     this->maze->print_maze_totxt(filename);
 }
-
 bool MazeSolver::get_solution_found(){
     return this->solution_found;
 }
