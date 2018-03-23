@@ -23,8 +23,8 @@ MazeSolver::MazeSolver(std::string filename){
 }
 
 MazeSolver::~MazeSolver(){
-    delete maze;
-    delete maze_print;
+    delete this->maze;
+    delete this->maze_print;
 }
 
 bool MazeSolver::a_star(){
@@ -172,13 +172,13 @@ void MazeSolver::print_maze_solution(){
 }
 
 void MazeSolver::print_maze_grid(){
-    maze->print_maze_grid();
+    this->maze->print_maze_grid();
 }
 void MazeSolver::print_maze(){
-    maze->print_maze();
+    this->maze->print_maze();
 }
 void MazeSolver::print_maze_totxt(std::string filename){
-    maze->print_maze_totxt(filename);
+    this->maze->print_maze_totxt(filename);
 }
 
 bool MazeSolver::get_solution_found(){

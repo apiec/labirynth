@@ -124,7 +124,6 @@ void MazeMenu::maze_loaded_menu(){
                 std::cout << "PLEASE CHOOSE A VALID OPTION\n";
         }
     }
-
 }
 
 int MazeMenu::read_int(int low_bound, int high_bound, std::string val_name){
