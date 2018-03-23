@@ -13,6 +13,10 @@ MazeMenu::~MazeMenu(){
     //dtor
 }
 
+/**
+ * This is the main menu for the program.
+ * It's possible to call other menus from this menu.
+**/
 void MazeMenu::main_menu(){
 
     bool stop = false;
@@ -46,6 +50,12 @@ void MazeMenu::main_menu(){
     }
 }
 
+/**
+ * This menu is called when the option to generate the maze is called.
+ * It prompts the user to input the height, width and the possibility to
+ * have multiple paths in the maze.
+**/
+
 void MazeMenu::generation_menu(){
     //setup
     std::cout
@@ -70,6 +80,11 @@ void MazeMenu::generation_menu(){
     maze_instance = NULL;
 }
 
+/**
+ * This menu is called if the option to load a maze from a txt file is chosen.
+ * It prompts the user for a filename and creates a MazeSolver object based off that.
+ * This quits if there is no txt file of a given name in the directory.
+**/
 void MazeMenu::txt_menu(){
     std::string filename = read_filename();
     std::ifstream f(filename.c_str());
@@ -84,6 +99,9 @@ void MazeMenu::txt_menu(){
     maze_instance = NULL;
 }
 
+/**
+ * This menu is called once the maze is loaded.
+**/
 void MazeMenu::maze_loaded_menu(){
     if(!maze_instance) return;
     bool stop = false;
@@ -92,7 +110,7 @@ void MazeMenu::maze_loaded_menu(){
         << "Maze menu\n"
         << "1. Display the maze\n"
         << "2. Display the maze and the solution\n"
-        << "3. Display the binary version of the maze\n"
+        << "3. Display the binary representation of the maze\n"
         << "4. Print the maze to a .txt file\n"
         << "9. EXIT\n";
         std::string input = "";
@@ -125,7 +143,9 @@ void MazeMenu::maze_loaded_menu(){
         }
     }
 }
-
+/**
+ * Read an int from the cmd.
+**/
 int MazeMenu::read_int(int low_bound, int high_bound, std::string val_name){
     int to_return = low_bound - 1;
     bool incorrect_input = false;
@@ -143,7 +163,11 @@ int MazeMenu::read_int(int low_bound, int high_bound, std::string val_name){
     }
     return to_return;
 }
-
+/**
+ * Reads a string from the cmd. Checks if there is a ".txt" suffix at the end
+ * of the filename. If there is not it appends the suffix.
+ * Returns the filename += (optional) suffix.
+**/
 std::string MazeMenu::read_filename(){
     std::string filename = "";
     std::cout << "Give a file name:\n";
