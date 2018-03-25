@@ -7,7 +7,9 @@
 
 #include "MyList.h"
 
-//default constructor
+/**
+ * Default constructor.
+**/
 Maze::Maze(bool is_treelike){
     this->width = 100;
     this->height = 40;
@@ -17,20 +19,28 @@ Maze::Maze(bool is_treelike){
     this->generate_maze();
 }
 
-//constructor with width and height as parameters
+/**
+ * Constructor with width and height as parameters. Also takes the treelike parameter.
+ * When treelike is set to true the maze generator creates a maze where there is
+ * only one possible from any given point to any other point.
+**/
 Maze::Maze(int h, int w, bool is_treelike): width(w), height(h) {
     this->initiate_startfinish();
     this->treelike = is_treelike;
     this->initiate_maze_grid();
     this->generate_maze();
 }
-
+/**
+ * Constructor that takes a filename with maze information as a parameter.
+**/
 Maze::Maze(std::string mazetxt){
     this->initiate_startfinish();
     this->generate_maze(mazetxt);
 }
 
-//deconstructor
+/**
+ * Destructor.
+**/
 Maze::~Maze(){
     //deleting maze_grid
     for(int i = 0; i < height; i++){
@@ -39,6 +49,9 @@ Maze::~Maze(){
     delete[] this->maze_grid;
 }
 
+/**
+ * Sets start and finish coordinates to (-1, -1).
+**/
 void Maze::initiate_startfinish(){
     this->start.x = -1;
     this->start.y = -1;
@@ -46,7 +59,9 @@ void Maze::initiate_startfinish(){
     this->finish.y = -1;
 }
 
-
+/**
+ * Creates a boolean two-dimensional (height x width) array full of 0.
+**/
 int Maze::initiate_maze_grid(){
     //initiating maze_grid with 0s
     this->maze_grid = new bool*[height];
@@ -58,10 +73,13 @@ int Maze::initiate_maze_grid(){
     return 0;
 }
 
+
+/**
+ * Adds walls of a cell to a wall_list. Checks if the neighbor
+ * is not on the edge and add it to the list if it's a wall.
+**/
 int Maze::add_wallstolist(xy cell, std::vector<xy>& wall_list){
-    //add walls of a cell to a wall_list
-    //check if the neighbor isn't on the edge
-    //and add it to the list if it's a wall
+
     if(cell.x + 1 < height - 1){
         xy tmp = cell;
         tmp.x++;
@@ -92,11 +110,12 @@ int Maze::add_wallstolist(xy cell, std::vector<xy>& wall_list){
     }
     return 0;
 }
-
+/**
+ * Checks if the given point can be a passage.
+ * It can be a passage only if a certain amount of its neighbors is passages already.
+**/
 bool Maze::can_bepassage(xy tocheck){
-    /**
-    * check if the given point can be a passage
-    **/
+
     int passage_count = 0;
     int corner_count = 0;
 
@@ -121,10 +140,11 @@ bool Maze::can_bepassage(xy tocheck){
     return true;
 }
 
+/**
+ * Generates the maze using randomized Prim's algorithm.
+**/
 int Maze::generate_maze(){
-    /**
-    * generates the maze using randomized Prim's algorithm
-    **/
+
     this->initiate_maze_grid();
     std::vector<xy> wall_vec;
 
@@ -137,7 +157,7 @@ int Maze::generate_maze(){
     this->maze_grid[pt.x][pt.y] = 1;
     //adding the starting point walls to the wall_vec
     add_wallstolist(pt, wall_vec);
-    //iterating until there are walls in the list
+    //going on until there are walls in the wall_vec
     while(!wall_vec.empty()){
         //choosing a random wall in the list
         int position = rand() % wall_vec.size();
@@ -153,14 +173,15 @@ int Maze::generate_maze(){
     this->random_startfinish();
     return 0;
 }
-
+/**
+ * Reads the maze from a txt file.
+ * Treats all '#' as walls.
+ * 's' as a start, 'e' as an end.
+**/
 int Maze::generate_maze(std::string filename){
-    /**
-    * reads the maze from a txt file, treats all '#' as walls
-    * 's' is a start, 'e' is an end
-    **/
-
+    //open a file with the given name
     std::ifstream f(filename.c_str());
+    //if f failed to open, quit.
     if(!f.is_open()) return -1;
     //loading the txt to a list of strings
     MyList<std::string> lines;
@@ -177,7 +198,7 @@ int Maze::generate_maze(std::string filename){
     this->height = (int)lines.size();
     this->initiate_maze_grid();
 
-    //setting some values
+    //setting some constants
     const char wll = '#';
     const char strt = 's';
     const char fnsh = 'e';
@@ -218,11 +239,13 @@ int Maze::generate_maze(std::string filename){
     return 0;
 }
 
-
+/**
+ * If there is no start or finish set up picks two point on the opposite corners of the maze.
+**/
 int Maze::random_startfinish(){
     //picks a random point that is a passage from opposite corners of the maze
     int x1 = 0;
-    int x2 = height - 1;
+    int x2 = bool(rand() % 2) ? 0 : height - 1;
     int y1 = 0;
     int y2 = width - 1;
 
@@ -245,13 +268,14 @@ int Maze::random_startfinish(){
     return 0;
 }
 
+/**
+ * Searches for a passage closest to the given point.
+ * If it finds one it substitutes the given point's coordinates
+ * with those of the found passage and returns true.
+ * If it does not find a passage it returns false.
+**/
 int Maze::find_nearest_passage(xy &point){
-    /**
-    *   searches for a passage closest to the given point
-    *   if it finds one it substitutes point's coordinates
-    *   to those of the found passage and returns true
-    *   if it doesn't find a passage it returns false
-    **/
+
     int search_radius = 1;
     int x = point.x;
     int y = point.y;
@@ -291,7 +315,9 @@ int Maze::find_nearest_passage(xy &point){
     return 0;
 }
 
-//prints out the maze_grid
+/**
+ * Prints out the maze_grid to the console.
+**/
 int Maze::print_maze_grid(){
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
@@ -304,7 +330,10 @@ int Maze::print_maze_grid(){
     return 0;
 }
 
-//prints out the maze_grid as a readable maze
+
+/**
+ * Prints out the maze_grid as a readable maze.
+**/
 int Maze::print_maze(){
     char wall = 219;
     char passage = ' ';
@@ -342,14 +371,16 @@ int Maze::print_maze(){
     return 0;
 }
 
-//prints the maze to txt
+/**
+ * Print the maze to a txt file. Passage is a space (' ').
+ * A wall is a hash ('#').
+**/
 int Maze::print_maze_totxt(std::string filename){
 
     std::ofstream txt_write(filename.c_str());
 
     if(!txt_write.is_open()) return -1;
 
-    // 178
     char wall = '#';
     char passage = ' ';
     for(int i = 0; i < height; i++){
@@ -373,19 +404,34 @@ int Maze::print_maze_totxt(std::string filename){
     return 0;
 }
 
-
+//getters
+/**
+ * Return the pointer to maze_grid.
+**/
 bool** Maze::get_maze_grid(){
     return this->maze_grid;
 }
+/**
+ * Return the value of height.
+**/
 int Maze::get_height(){
     return this->height;
 }
+/**
+ * Return the value of width.
+**/
 int Maze::get_width(){
     return this->width;
 }
+/**
+ * Returns the start coordinates.
+**/
 xy Maze::get_start(){
     return this->start;
 }
+/**
+ * Returns the finish coordinates.
+**/
 xy Maze::get_finish(){
     return this->finish;
 }
