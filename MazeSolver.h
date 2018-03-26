@@ -6,6 +6,12 @@
 #include "Cell.h"
 #include <vector>
 
+/** \brief Solves mazees using an A* algorithm.
+ *
+ * It contains a Maze type object and finds a path made only out of passages
+ * from the start to finish cells.
+**/
+
 class MazeSolver {
 
     private:

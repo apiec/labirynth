@@ -5,6 +5,11 @@
 #include <vector>
 #include "xy.h"
 
+/** \brief Contains basic functionality of a maze.
+ *
+ * The maze is made up of square cells. Each cell can either be a wall or a passage.
+ * A maze can either randomly generated or read from a txt file.
+**/
 class Maze {
 
     private:

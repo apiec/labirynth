@@ -2,9 +2,7 @@
 #define MAZEMENU_H
 #include "MazeSolver.h"
 
-/**
- * This module provides the UI functionality for the program.
-**/
+/** \brief This module provides the UI functionality for the program. */
 
 class MazeMenu
 {

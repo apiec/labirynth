@@ -33,7 +33,7 @@ MazeSolver::MazeSolver(int h, int w, bool treelike){
 }
 
 /**
- * Constructor. Takes a filename string as an input. Reads the maze off that txt file.
+ * Constructor. Takes a filename string as an input. Reads the maze off that txt file and call the a_star algorithm.
 **/
 MazeSolver::MazeSolver(std::string filename){
     //create the Maze object

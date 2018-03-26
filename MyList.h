@@ -2,8 +2,10 @@
 #define MYLIST_H
 #include <cstdlib>
 
-/**
-*   an implementation of a dynamic list that can hold any type of data
+/** \brief A dynamic list.
+ *
+ * A dynamic list that has many of the functionalities of the standard C++ list.
+ * It can hold any data type.
 **/
 
 template <class T>
@@ -11,14 +13,17 @@ class MyList
 {
     private:
 
+        /**
+         * The node struct. Contains the element and pointers to the previous and next node.
+        **/
         struct Node {
-            T el; //element
-            Node* next;
-            Node* prev;
+            T el;       /**< The element. */
+            Node* next; /**< Pointer to the next node */
+            Node* prev; /**< Pointer to the previous node */
         };
 
-        Node* head;
-        Node* last;
+        Node* head;  /**< The first element of the list. */
+        Node* last;  /**< The last element of the list.  */
 
     public:
 
@@ -35,22 +40,30 @@ class MyList
         ~MyList();
 };
 
+/**
+ * Constructor. Sets the head and last to NULL.
+**/
 template <class T>
 MyList<T>::MyList(){
     head = NULL;
     last = NULL;
 }
 
+/**
+ * Destructor. Deletes all the nodes in the list.
+**/
 template <class T>
 MyList<T>::~MyList(){
-   // Node* p;
-    //while(head){
-    //    p = head;
-    //    head = head->next;
-    //    delete p;
-    //}
+    Node* p;
+    while(head){
+        p = head;
+        head = head->next;
+        delete p;
+    }
 }
-
+/**
+ * Add an element to the front of the list.
+**/
 template <class T>
 void MyList<T>::push_front(T to_add){
     //creating a new Node
@@ -59,13 +72,19 @@ void MyList<T>::push_front(T to_add){
     new_node->next = head;
     new_node->prev = NULL;
 
+    if(head){
+        head->prev = new_node;
+    }
     head = new_node;
-
+    //if there is no last the list is empty, so it needs to be set
     if(!last){
         last = new_node;
     }
 }
 
+/**
+ * Add an element to the back of the list.
+**/
 template <class T>
 void MyList<T>::push_back(T to_add){
     //creating a new Node
@@ -77,6 +96,7 @@ void MyList<T>::push_back(T to_add){
     if(last){
         last->next = new_node;
     }
+
     last = new_node;
 
     if(!head){
@@ -84,6 +104,9 @@ void MyList<T>::push_back(T to_add){
     }
 }
 
+/**
+ * Delete the first element of the list.
+**/
 template <class T>
 void MyList<T>::pop_front(){
 
@@ -99,6 +122,9 @@ void MyList<T>::pop_front(){
     delete p;
 }
 
+/**
+ * Delete the last element of the list.
+**/
 template <class T>
 void MyList<T>::pop_back(){
 
@@ -114,16 +140,26 @@ void MyList<T>::pop_back(){
     delete p;
 }
 
+/**
+ * Return the first element of the list. Undefined behavior if the list is empty.
+**/
 template <class T>
 T MyList<T>::front(){
     return head->el;
 }
 
+/**
+ * Return the last element of the list. Undefined behavior if the list is empty.
+**/
 template <class T>
 T MyList<T>::back(){
     return last->el;
 }
 
+/**
+ * Returns true if the list is empty.
+ * False if there are elements in the list.
+**/
 template <class T>
 bool MyList<T>::empty(){
     if(head){
@@ -132,6 +168,9 @@ bool MyList<T>::empty(){
     return true;
 }
 
+/**
+ * Returns the number of the elements in the list.
+**/
 template <class T>
 std::size_t MyList<T>::size(){
     std::size_t sz = 0;

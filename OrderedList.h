@@ -4,24 +4,28 @@
 #include "Cell.h"
 #include <cstdlib>
 
-/**
-* this is an implemented priority queue
-* the smallest item is at the front
-* the biggest item is at the back
+/** \brief A dynamic ordered list (a priority queue).
+ *
+ * This is a list that orders the elements as they are passed to it.
+ * The smallest item is at the front.
+ * The largest item is at the back
 **/
 template<class T>
 class OrderedList
 {
     private:
 
+        /**
+         * The node struct. Contains the element and pointers to the previous and next node.
+        **/
         struct Node {
-            T el; //element
-            Node* next;
-            Node* prev;
+            T el;       /**< The element. */
+            Node* next; /**< Pointer to the next node */
+            Node* prev; /**< Pointer to the previous node */
         };
 
-        Node* head;
-        Node* last;
+        Node* head;  /**< The first element of the list. The smallest one.*/
+        Node* last;  /**< The last element of the list. The largest one. */
 
     public:
 
@@ -38,12 +42,18 @@ class OrderedList
         ~OrderedList();
 };
 
+/**
+ * Constructor. Sets the head and last to NULL.
+**/
 template<class T>
 OrderedList<T>::OrderedList(){
     head = NULL;
     last = NULL;
 }
 
+/**
+ * Destructor. Deletes all the nodes in the list.
+**/
 template<class T>
 OrderedList<T>::~OrderedList(){
     Node* p;
@@ -53,8 +63,13 @@ OrderedList<T>::~OrderedList(){
         delete p;
     }
 }
+
+/** \brief Add an element to the list.
+ * Creates a new Node and inserts it into the right place.
+**/
 template<class T>
 void OrderedList<T>::append(T new_el){
+    //create a new node
     Node* to_add = new Node;
     to_add->el = new_el;
     to_add->prev = NULL;
@@ -62,17 +77,19 @@ void OrderedList<T>::append(T new_el){
 
     Node* next = head;
     Node* prev = NULL;
-
+    //search for the right place to place the new node
+    //while there is a next node and the new element is bigger than the next element
     while(next && to_add->el > next->el){
         prev = next;
         next = next->next;
     }
-
+    //if there is no prev it means the new node will be the new head
     if(prev){
         prev->next = to_add;
     }else{
         head = to_add;
     }
+    //if there is no next it means the new node will be the new last
     if(next){
         next->prev = to_add;
     }else{
@@ -82,9 +99,11 @@ void OrderedList<T>::append(T new_el){
     to_add->next = next;
 }
 
+/**
+ * Delete the first element of the list.
+**/
 template<class T>
 void OrderedList<T>::pop_front(){
-
     if(!head) return;
 
     Node* p = head;
@@ -97,6 +116,9 @@ void OrderedList<T>::pop_front(){
     delete p;
 }
 
+/**
+ * Delete the last element of the list.
+**/
 template<class T>
 void OrderedList<T>::pop_back(){
 
@@ -112,21 +134,35 @@ void OrderedList<T>::pop_back(){
     delete p;
 }
 
+
+/**
+ * Return the first element of the list. Undefined behavior if the list is empty.
+**/
 template<class T>
 T OrderedList<T>::front(){
     return head->el;
 }
 
+/**
+ * Return the last element of the list. Undefined behavior if the list is empty.
+**/
 template<class T>
 T OrderedList<T>::back(){
     return last->el;
 }
 
+/**
+ * Returns true if the list is empty.
+ * False if there are elements in the list.
+**/
 template<class T>
 bool OrderedList<T>::empty(){
     return !head;
 }
 
+/**
+ * Searches the list for the element that is equal (==) to the element that is passed as the argument.
+**/
 template<class T>
 bool OrderedList<T>::contains(T to_check){
     Node* p = head;
@@ -139,6 +175,9 @@ bool OrderedList<T>::contains(T to_check){
     return false;
 }
 
+/**
+ * Returns the number of the elements in the list.
+**/
 template<class T>
 std::size_t OrderedList<T>::size(){
     std::size_t sz = 0;
