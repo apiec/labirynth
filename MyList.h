@@ -54,13 +54,8 @@ MyList<T>::MyList(){
 **/
 template <class T>
 MyList<T>::~MyList(){
-    Node* p;
-    while(head){
-        p = head;
-        head = head->next;
-        delete p;
-    }
 }
+
 /**
  * Add an element to the front of the list.
 **/

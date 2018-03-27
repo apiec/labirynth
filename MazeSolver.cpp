@@ -74,7 +74,7 @@ bool MazeSolver::a_star(){
     for(int i = 0; i < height; i++){
         cell_grid[i] = new Cell[width];
         for(int j = 0; j < width; j++){
-            cell_grid[i][j].setup(i, j, height, width, finish, maze_grid, cell_grid);
+            cell_grid[i][j].setup(i, j, finish);
         }
     }
     //setting the neigbors of the cells
@@ -82,7 +82,7 @@ bool MazeSolver::a_star(){
     //for the neighbors to be added so we do that in a separate loop
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
-            cell_grid[i][j].set_neighbors(height, width, finish, maze_grid, cell_grid);
+            cell_grid[i][j].set_neighbors(height, width, maze_grid, cell_grid);
         }
     }
 

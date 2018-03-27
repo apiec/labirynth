@@ -3,23 +3,27 @@
 #include "xy.h"
 #include "MyList.h"
 
+/**
+ * Cells class used in the A* search algorithm. Each cell is a point of a Maze.
+**/
 class Cell {
     public:
-        int g_cost;
-        int h_cost;
+        int g_cost; /**< The cost of traveling from the start to this cell. */
+        int h_cost; /**< The heuristic. The expected shortest way to get to the finish.*/
 
-        xy location;
-        xy parent;
+        xy location; /**< The position of this cell. */
+        xy parent;   /**< The position of this cell's parent. */
 
-        MyList<xy> neighbors;
+        MyList<xy> neighbors; /**< The list of the positions of all neighbor cells. */
 
         Cell();
         ~Cell();
 
-        void setup(int i, int j, int height, int width, xy finish, bool** maze_grid, Cell** cell_grid);
-        void set_neighbors(int height, int width, xy finish, bool** maze_grid, Cell** cell_grid);
-
         int f_cost() const;
+
+        void setup(int i, int j, xy finish);
+
+        void set_neighbors(int height, int width, bool** maze_grid, Cell** cell_grid);
 
         bool operator< (const Cell& rhs) const;
         bool operator> (const Cell& rhs) const;

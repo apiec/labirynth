@@ -104,6 +104,7 @@ void OrderedList<T>::append(T new_el){
 **/
 template<class T>
 void OrderedList<T>::pop_front(){
+
     if(!head) return;
 
     Node* p = head;
