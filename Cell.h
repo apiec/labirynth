@@ -4,7 +4,7 @@
 #include "MyList.h"
 
 /**
- * Cells class used in the A* search algorithm. Each cell is a point of a Maze.
+ * \brief Cells class used in the A* search algorithm. Each cell is a point of a Maze.
 **/
 class Cell {
     public:
