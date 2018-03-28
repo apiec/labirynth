@@ -397,9 +397,10 @@ int Maze::print_maze_totxt(std::string filename){
                 }
             }
         }
-        txt_write << "\n";
+        if(i != height - 1){
+            txt_write << "\n";
+        }
     }
-
     txt_write.close();
     return 0;
 }
